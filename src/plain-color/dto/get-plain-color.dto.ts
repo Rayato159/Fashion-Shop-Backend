@@ -1,4 +1,4 @@
-import { IsOptional } from "class-validator";
+import { IsEnum, IsOptional } from "class-validator";
 import { PriceSort } from "../../enums/price-sort.enum";
 
 export class GetPlainColorDto {
@@ -7,5 +7,6 @@ export class GetPlainColorDto {
     color?: string
 
     @IsOptional()
+    @IsEnum(PriceSort)
     price?: PriceSort 
 }

@@ -1,10 +1,10 @@
 import { IsEnum, IsOptional } from "class-validator";
-import { PriceSort } from "../../enums/price-sort.enum";
+import { PriceSort } from "src/enums/price-sort.enum";
 
-export class GetPatternDto {
+export class GetFigureDto {
 
     @IsOptional()
-    pattern?: string
+    figure?: string
 
     @IsOptional()
     @IsEnum(PriceSort)
