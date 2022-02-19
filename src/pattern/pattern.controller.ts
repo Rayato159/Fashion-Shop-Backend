@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -33,5 +33,14 @@ export class PatternController {
         @Param('pattern_id') pattern_id: string 
     ): Promise<Pattern> {
         return this.patternService.getPatternById(pattern_id)
+    }
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Delete(':pattern_id/delete')
+    deletePattern(
+        @Param('pattern_id') pattern_id: string 
+    ): Promise<Pattern> {
+        return this.patternService.deletePattern(pattern_id)
     }
 }

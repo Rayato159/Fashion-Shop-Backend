@@ -61,4 +61,14 @@ export class PatternService {
             throw new NotFoundException()
         }
     }
+
+    async deletePattern(pattern_id: string): Promise<Pattern> {
+        try {
+            const pattern = await this.patternRepository.findOne(pattern_id)
+            await this.patternRepository.delete(pattern_id)
+            return pattern
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
