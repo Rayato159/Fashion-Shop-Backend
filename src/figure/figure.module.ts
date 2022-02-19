@@ -3,6 +3,7 @@ import { FigureService } from './figure.service';
 import { FigureController } from './figure.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FigureRepository } from './figure.repository';
+import { RolesGuard } from 'src/users/roles.guard';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { FigureRepository } from './figure.repository';
       FigureRepository,
     ]),
   ],
-  providers: [FigureService],
+  providers: [FigureService, RolesGuard],
   controllers: [FigureController]
 })
 export class FigureModule {}
