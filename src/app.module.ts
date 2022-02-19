@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { PlainColorModule } from './plain-color/plain-color.module';
 import { PatternModule } from './pattern/pattern.module';
 import { FigureModule } from './figure/figure.module';
+import { GenderModule } from './gender/gender.module';
 
 @Module({
   imports: [
@@ -34,7 +35,8 @@ import { FigureModule } from './figure/figure.module';
     AuthModule,
     PlainColorModule,
     PatternModule,
-    FigureModule
+    FigureModule,
+    GenderModule
   ],
   controllers: [AppController],
   providers: [AppService],
