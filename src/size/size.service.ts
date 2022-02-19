@@ -1,0 +1,46 @@
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateSizeDto } from './dto/create-size.dto';
+import { GetSizeDto } from './dto/get-size.dto';
+import { Size } from './size.entity';
+import { SizeRepository } from './size.repository';
+
+@Injectable()
+export class SizeService {
+    constructor(
+        @InjectRepository(SizeRepository)
+        private sizeReposiotry: SizeRepository,
+    ) {}
+
+    async createSize(createSizeDto: CreateSizeDto): Promise<Size> {
+        try {
+            const { size, price_factor } = createSizeDto
+            const sizeCreated = this.sizeReposiotry.create({
+                size: size.toLocaleUpperCase(),
+                price_factor,
+            })
+            return await this.sizeReposiotry.save(sizeCreated)
+        } catch(e) {
+            throw new BadRequestException()
+        }
+    }
+
+    async getSize(getSizeDto: GetSizeDto): Promise<Size[]> {
+        try {
+            const { size } = getSizeDto
+            const query = this.sizeReposiotry.createQueryBuilder('size')
+            if(size) {
+                query.andWhere('(LOWER(size.size) LIKE LOWER(:size))', { size: `%${size}%` })
+            }
+            query.orderBy('size.size', 'ASC')
+
+            const results = await query.getMany()
+            if(results.length > 0){
+                return results
+            }
+            throw new NotFoundException()
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+}

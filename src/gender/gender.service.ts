@@ -15,7 +15,7 @@ export class GenderService {
         try {
             const { gender, price_factor } = createGenderDto
             const genderCreated = this.genderRepository.create({
-                gender,
+                gender: gender.toLocaleLowerCase(),
                 price_factor,
             })
             return await this.genderRepository.save(genderCreated)

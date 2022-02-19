@@ -9,6 +9,7 @@ import { PlainColorModule } from './plain-color/plain-color.module';
 import { PatternModule } from './pattern/pattern.module';
 import { FigureModule } from './figure/figure.module';
 import { GenderModule } from './gender/gender.module';
+import { SizeModule } from './size/size.module';
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { GenderModule } from './gender/gender.module';
     PlainColorModule,
     PatternModule,
     FigureModule,
-    GenderModule
+    GenderModule,
+    SizeModule
   ],
   controllers: [AppController],
   providers: [AppService],
