@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -26,5 +26,12 @@ export class FigureController {
         @Query() getFigureDto: GetFigureDto
     ): Promise<Figure[]> {
         return this.figureService.getFigure(getFigureDto)
+    }
+
+    @Get(':figure_id')
+    getFigureById(
+        @Param('figure_id') figure_id: string
+    ): Promise<Figure> {
+        return this.figureService.getFigureById(figure_id)
     }
 }

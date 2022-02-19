@@ -49,4 +49,12 @@ export class FigureService {
             throw new NotFoundException()
         }
     }
+
+    async getFigureById(figure_id: string): Promise<Figure> {
+        try {
+            return await this.figureRepository.findOne(figure_id)
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
