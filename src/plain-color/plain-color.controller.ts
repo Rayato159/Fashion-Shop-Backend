@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -35,5 +35,14 @@ export class PlainColorController {
         @Param() plain_color_id: string,
     ): Promise<PlainColor> {
         return this.plainColorService.getPlainColorById(plain_color_id)
+    }
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Delete(':plain_color_id/delete')
+    deletePlainColor(
+        @Param() plain_color_id: string,
+    ): Promise<PlainColor> {
+        return this.plainColorService.deletePlainColor(plain_color_id)
     }
 }

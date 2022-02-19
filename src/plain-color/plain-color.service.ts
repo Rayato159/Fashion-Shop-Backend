@@ -54,4 +54,14 @@ export class PlainColorService {
             throw new NotFoundException()
         }
     }
+
+    async deletePlainColor(plain_color_id: string): Promise<PlainColor> {
+        try {
+            const plainColor = await this.getPlainColorById(plain_color_id)
+            await this.plainColorReposiotry.delete(plain_color_id)
+            return plainColor
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
