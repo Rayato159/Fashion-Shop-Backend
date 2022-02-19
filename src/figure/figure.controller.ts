@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -33,5 +33,14 @@ export class FigureController {
         @Param('figure_id') figure_id: string
     ): Promise<Figure> {
         return this.figureService.getFigureById(figure_id)
+    }
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Delete(':figure_id/delete')
+    deleteFigure(
+        @Param('figure_id') figure_id: string
+    ): Promise<Figure> {
+        return this.figureService.deleteFigure(figure_id)
     }
 }

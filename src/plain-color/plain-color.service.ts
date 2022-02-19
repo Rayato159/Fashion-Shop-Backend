@@ -16,11 +16,11 @@ export class PlainColorService {
     async createPlainColor(createPlainColorDto: CreatePlainColorDto): Promise<PlainColor> {
         try {
             const { color, price_factor } = createPlainColorDto
-            const plainColor = this.plainColorReposiotry.create({
+            const plainColorCreated = this.plainColorReposiotry.create({
                 color: color.toLocaleLowerCase(),
                 price_factor,
             })
-            return await this.plainColorReposiotry.save(plainColor)
+            return await this.plainColorReposiotry.save(plainColorCreated)
         } catch(e) {
             throw new BadRequestException()
         }

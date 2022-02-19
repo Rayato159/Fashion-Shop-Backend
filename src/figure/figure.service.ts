@@ -57,4 +57,14 @@ export class FigureService {
             throw new NotFoundException()
         }
     }
+
+    async deleteFigure(figure_id: string): Promise<Figure> {
+        try {
+            const figure = await this.getFigureById(figure_id)
+            await this.figureRepository.delete(figure_id)
+            return figure
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
