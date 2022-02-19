@@ -10,6 +10,7 @@ import { PatternModule } from './pattern/pattern.module';
 import { FigureModule } from './figure/figure.module';
 import { GenderModule } from './gender/gender.module';
 import { SizeModule } from './size/size.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { SizeModule } from './size/size.module';
     PatternModule,
     FigureModule,
     GenderModule,
-    SizeModule
+    SizeModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
