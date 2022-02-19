@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -26,5 +26,21 @@ export class SizeController {
         @Query() getSizeDto: GetSizeDto,
     ): Promise<Size[]> {
         return this.sizeService.getSize(getSizeDto)
+    }
+
+    @Get(':size_id')
+    getSizeById(
+        @Param('size_id') size_id: string,
+    ): Promise<Size> {
+        return this.sizeService.getSizebyId(size_id)
+    }
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Delete(':size_id/delete')
+    deleteSize(
+        @Param('size_id') size_id: string,
+    ): Promise<Size> {
+        return this.sizeService.deleteSize(size_id)
     }
 }
