@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PlainColorModule } from './plain-color/plain-color.module';
+import { PatternModule } from './pattern/pattern.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { PlainColorModule } from './plain-color/plain-color.module';
     }),
     UsersModule,
     AuthModule,
-    PlainColorModule
+    PlainColorModule,
+    PatternModule
   ],
   controllers: [AppController],
   providers: [AppService],
