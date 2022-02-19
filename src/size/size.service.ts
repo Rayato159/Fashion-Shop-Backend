@@ -52,6 +52,14 @@ export class SizeService {
         }
     }
 
+    async getSizeByKey(size: string): Promise<Size> {
+        try {
+            return await this.sizeReposiotry.findOne({ where: { size: size } })
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
     async deleteSize(size_id: string): Promise<Size> {
         try {
             const size = await this.getSizebyId(size_id)

@@ -44,6 +44,14 @@ export class GenderService {
         }
     }
 
+    async getGenderByKey(gender: string): Promise<Gender> {
+        try {
+            return await this.genderRepository.findOne({ where: { gender: gender } })
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
     async deleteGender(gender_id: string): Promise<Gender> {
         try {
             const gender = await this.getGenderById(gender_id)

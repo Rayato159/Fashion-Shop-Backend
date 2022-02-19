@@ -58,6 +58,14 @@ export class PatternService {
         }
     }
 
+    async getPatternByKey(pattern: string): Promise<Pattern> {
+        try {
+            return await this.patternRepository.findOne({ where: { pattern: pattern } })
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
     async deletePattern(pattern_id: string): Promise<Pattern> {
         try {
             const pattern = await this.patternRepository.findOne(pattern_id)

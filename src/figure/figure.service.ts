@@ -58,6 +58,14 @@ export class FigureService {
         }
     }
 
+    async getFigureByKey(figure: string): Promise<Figure> {
+        try {
+            return await this.figureRepository.findOne({ where: { figure: figure } })
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
     async deleteFigure(figure_id: string): Promise<Figure> {
         try {
             const figure = await this.getFigureById(figure_id)

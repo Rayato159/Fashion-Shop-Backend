@@ -28,11 +28,11 @@ export class FigureController {
         return this.figureService.getFigure(getFigureDto)
     }
 
-    @Get(':figure_id')
-    getFigureById(
-        @Param('figure_id') figure_id: string
+    @Get(':figure')
+    getFigureByKey(
+        @Param('figure') figure: string
     ): Promise<Figure> {
-        return this.figureService.getFigureById(figure_id)
+        return this.figureService.getFigureByKey(figure)
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)

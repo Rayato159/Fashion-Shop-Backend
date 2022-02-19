@@ -25,11 +25,11 @@ export class GenderController {
         return this.genderService.getGender()
     }
 
-    @Get(':gender_id')
-    getGenderById(
-        @Param('gender_id') gender_id: string,
+    @Get(':gender')
+    getGenderByKey(
+        @Param('gender') gender: string,
     ): Promise<Gender> {
-        return this.genderService.getGenderById(gender_id)
+        return this.genderService.getGenderByKey(gender)
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)

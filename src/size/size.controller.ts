@@ -28,11 +28,11 @@ export class SizeController {
         return this.sizeService.getSize(getSizeDto)
     }
 
-    @Get(':size_id')
-    getSizeById(
-        @Param('size_id') size_id: string,
+    @Get(':size')
+    getSizeByKey(
+        @Param('size') size: string
     ): Promise<Size> {
-        return this.sizeService.getSizebyId(size_id)
+        return this.sizeService.getSizeByKey(size)
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)
