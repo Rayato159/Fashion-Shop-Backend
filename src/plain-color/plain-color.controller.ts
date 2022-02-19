@@ -16,7 +16,7 @@ export class PlainColorController {
     
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.Admin)
-    @Post('/create')
+    @Post('create')
     createPlainColor(
         @Body() createPlainColorDto: CreatePlainColorDto,
     ): Promise<PlainColor> {
