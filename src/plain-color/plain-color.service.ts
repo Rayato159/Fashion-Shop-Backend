@@ -1,6 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { query } from 'express';
 import { CreatePlainColorDto } from './dto/create-plain-color.dto';
+import { getPlainColorDto } from './dto/get-plain-color.dto';
+import { PriceSort } from './enums/price-sort.enum';
 import { PlainColor } from './plain-color.entity';
 import { PlainColorRepository } from './plain-color.repository';
 
@@ -13,12 +16,34 @@ export class PlainColorService {
 
     async createPlainColor(createPlainColorDto: CreatePlainColorDto): Promise<PlainColor> {
         try {
+            const { color, price_factor } = createPlainColorDto
             const plainColor = this.plainColorReposiotry.create({
-                ...createPlainColorDto
+                color: color.toLocaleLowerCase(),
+                price_factor,
             })
             return await this.plainColorReposiotry.save(plainColor)
         } catch(e) {
             throw new BadRequestException()
+        }
+    }
+
+    async getPlainColor(getPlainColorDto: getPlainColorDto): Promise<PlainColor[]> {
+        try {
+            const { color, price } = getPlainColorDto
+            const query = this.plainColorReposiotry
+                .createQueryBuilder('plain_color')
+                .orderBy('plain_color.color', 'ASC')
+
+            if(color) {
+                query.andWhere('(LOWER(plain_color.color) LIKE LOWER(:color))', { color: `%${color}%` })
+            }
+            if(price) {
+                price === PriceSort.asc? query.orderBy('plain_color.price_factor', 'ASC'): query.orderBy('plain_color.price_factor', 'DESC')
+            }
+
+            return await query.getMany()
+        } catch(e) {
+            throw new NotFoundException()
         }
     }
 }

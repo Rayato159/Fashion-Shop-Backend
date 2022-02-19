@@ -6,7 +6,7 @@ export class PlainColor {
     @PrimaryGeneratedColumn('uuid')
     plain_color_id: string
 
-    @Column()
+    @Column({ unique: true })
     color: string
 
     @Column({ type: 'double precision' })
