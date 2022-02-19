@@ -30,11 +30,11 @@ export class PlainColorController {
         return this.plainColorService.getPlainColor(getPlainColorDto)
     }
 
-    @Get(':plain_color_id')
-    getPlainColorById(
-        @Param('plain_color_id') plain_color_id: string,
+    @Get(':color')
+    getPlainColorByKey(
+        @Param('color') color: string,
     ): Promise<PlainColor> {
-        return this.plainColorService.getPlainColorById(plain_color_id)
+        return this.plainColorService.getPlainColorByKey(color)
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)

@@ -58,6 +58,14 @@ export class PlainColorService {
         }
     }
 
+    async getPlainColorByKey(color: string): Promise<PlainColor> {
+        try {
+            return await this.plainColorReposiotry.findOne({ where: { color: color } })
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
     async deletePlainColor(plain_color_id: string): Promise<PlainColor> {
         try {
             const plainColor = await this.getPlainColorById(plain_color_id)

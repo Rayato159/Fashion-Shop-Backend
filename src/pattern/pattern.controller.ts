@@ -28,11 +28,11 @@ export class PatternController {
         return this.patternService.getPattern(getPatternDto)
     }
 
-    @Get(':pattern_id')
-    getPatternById(
-        @Param('pattern_id') pattern_id: string 
+    @Get(':pattern')
+    getPatternByKey(
+        @Param('pattern') pattern: string 
     ): Promise<Pattern> {
-        return this.patternService.getPatternById(pattern_id)
+        return this.patternService.getPatternByKey(pattern)
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)
