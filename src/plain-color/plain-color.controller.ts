@@ -4,7 +4,7 @@ import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
 import { RolesGuard } from 'src/users/roles.guard';
 import { CreatePlainColorDto } from './dto/create-plain-color.dto';
-import { getPlainColorDto } from './dto/get-plain-color.dto';
+import { GetPlainColorDto } from './dto/get-plain-color.dto';
 import { PlainColor } from './plain-color.entity';
 import { PlainColorService } from './plain-color.service';
 
@@ -25,7 +25,7 @@ export class PlainColorController {
 
     @Get()
     getPlainColor(
-        @Query() getPlainColorDto: getPlainColorDto
+        @Query() getPlainColorDto: GetPlainColorDto
     ): Promise<PlainColor[]> {
         return this.plainColorService.getPlainColor(getPlainColorDto)
     }

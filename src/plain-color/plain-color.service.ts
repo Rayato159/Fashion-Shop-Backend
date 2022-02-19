@@ -1,9 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { query } from 'express';
 import { CreatePlainColorDto } from './dto/create-plain-color.dto';
-import { getPlainColorDto } from './dto/get-plain-color.dto';
-import { PriceSort } from './enums/price-sort.enum';
+import { GetPlainColorDto } from './dto/get-plain-color.dto';
+import { PriceSort } from '../enums/price-sort.enum';
 import { PlainColor } from './plain-color.entity';
 import { PlainColorRepository } from './plain-color.repository';
 
@@ -27,7 +26,7 @@ export class PlainColorService {
         }
     }
 
-    async getPlainColor(getPlainColorDto: getPlainColorDto): Promise<PlainColor[]> {
+    async getPlainColor(getPlainColorDto: GetPlainColorDto): Promise<PlainColor[]> {
         try {
             const { color, price } = getPlainColorDto
             const query = this.plainColorReposiotry
@@ -41,7 +40,11 @@ export class PlainColorService {
                 price === PriceSort.asc? query.orderBy('plain_color.price_factor', 'ASC'): query.orderBy('plain_color.price_factor', 'DESC')
             }
 
-            return await query.getMany()
+            const results = await query.getMany()
+            if(results.length > 0) {
+                return results
+            }
+            throw new NotFoundException()
         } catch(e) {
             throw new NotFoundException()
         }
