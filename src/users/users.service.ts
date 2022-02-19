@@ -4,6 +4,7 @@ import { RegisterDto } from './dto/register.dto';
 import { Users } from './users.entity';
 import { UsersRepository } from './users.repository';
 import *  as bcrypt from 'bcrypt'
+import { Role } from './enums/roles.enum';
 
 @Injectable()
 export class UsersService {
@@ -14,7 +15,7 @@ export class UsersService {
     
     async register(registerDto: RegisterDto): Promise<Users> {
         try {
-            const { username, password, passwordConfirm } = registerDto
+            const { username, password, passwordConfirm, role } = registerDto
             // Check if not match password with password-confirm
             if(password !== passwordConfirm) {
                 throw new BadRequestException()
@@ -26,6 +27,7 @@ export class UsersService {
             const user = this.usersRepository.create({
                 username,
                 password: hash,
+                role: role? role: Role.User,
             })
             return await this.usersRepository.save(user)
         } catch(e) {
