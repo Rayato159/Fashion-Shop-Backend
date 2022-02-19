@@ -53,4 +53,12 @@ export class PatternService {
             throw new NotFoundException()
         }
     }
+
+    async getPatternById(pattern_id: string): Promise<Pattern> {
+        try {
+            return await this.patternRepository.findOne(pattern_id)
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }

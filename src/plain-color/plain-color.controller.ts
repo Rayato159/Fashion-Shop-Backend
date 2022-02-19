@@ -32,7 +32,7 @@ export class PlainColorController {
 
     @Get(':plain_color_id')
     getPlainColorById(
-        @Param() plain_color_id: string,
+        @Param('plain_color_id') plain_color_id: string,
     ): Promise<PlainColor> {
         return this.plainColorService.getPlainColorById(plain_color_id)
     }
@@ -41,7 +41,7 @@ export class PlainColorController {
     @Roles(Role.Admin)
     @Delete(':plain_color_id/delete')
     deletePlainColor(
-        @Param() plain_color_id: string,
+        @Param('plain_color_id') plain_color_id: string,
     ): Promise<PlainColor> {
         return this.plainColorService.deletePlainColor(plain_color_id)
     }
