@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -28,5 +28,12 @@ export class PlainColorController {
         @Query() getPlainColorDto: getPlainColorDto
     ): Promise<PlainColor[]> {
         return this.plainColorService.getPlainColor(getPlainColorDto)
+    }
+
+    @Get(':plain_color_id')
+    getPlainColorById(
+        @Param() plain_color_id: string,
+    ): Promise<PlainColor> {
+        return this.plainColorService.getPlainColorById(plain_color_id)
     }
 }

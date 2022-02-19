@@ -46,4 +46,12 @@ export class PlainColorService {
             throw new NotFoundException()
         }
     }
+
+    async getPlainColorById(plain_color_id: string): Promise<PlainColor> {
+        try {
+            return await this.plainColorReposiotry.findOne(plain_color_id)
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
