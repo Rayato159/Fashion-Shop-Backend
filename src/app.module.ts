@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PlainColorModule } from './plain-color/plain-color.module';
 import { PatternModule } from './pattern/pattern.module';
+import { FigureModule } from './figure/figure.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { PatternModule } from './pattern/pattern.module';
     UsersModule,
     AuthModule,
     PlainColorModule,
-    PatternModule
+    PatternModule,
+    FigureModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -15,16 +15,12 @@ export class PatternService {
 
     async createPattern(createPatternDto: CreatePatternDto): Promise<Pattern> {
         try {
-            try {
-                const { pattern, price_factor } = createPatternDto
-                const patternCreated = this.patternRepository.create({
-                    pattern: pattern.toLocaleLowerCase(),
-                    price_factor,
-                })
-                return await this.patternRepository.save(patternCreated)
-            } catch(e) {
-                throw new BadRequestException()
-            }
+            const { pattern, price_factor } = createPatternDto
+            const patternCreated = this.patternRepository.create({
+                pattern: pattern.toLocaleLowerCase(),
+                price_factor,
+            })
+            return await this.patternRepository.save(patternCreated)
         } catch(e) {
             throw new BadRequestException()
         }
