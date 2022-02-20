@@ -12,6 +12,7 @@ import { RolesGuard } from 'src/users/roles.guard';
     ]),
   ],
   providers: [SizeService, RolesGuard],
-  controllers: [SizeController]
+  controllers: [SizeController],
+  exports: [SizeService]
 })
 export class SizeModule {}

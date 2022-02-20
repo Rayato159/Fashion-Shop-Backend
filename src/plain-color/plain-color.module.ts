@@ -12,6 +12,7 @@ import { PlainColorRepository } from './plain-color.repository';
     ]),
   ],
   providers: [PlainColorService, RolesGuard],
-  controllers: [PlainColorController]
+  controllers: [PlainColorController],
+  exports: [PlainColorService]
 })
 export class PlainColorModule {}

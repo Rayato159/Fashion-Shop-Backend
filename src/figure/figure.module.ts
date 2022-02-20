@@ -12,6 +12,7 @@ import { RolesGuard } from 'src/users/roles.guard';
     ]),
   ],
   providers: [FigureService, RolesGuard],
-  controllers: [FigureController]
+  controllers: [FigureController],
+  exports: [FigureService]
 })
 export class FigureModule {}

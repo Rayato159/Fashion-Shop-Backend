@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Products } from "src/products/products.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'figure' })
 export class Figure {
@@ -11,4 +12,9 @@ export class Figure {
 
     @Column({ type: 'double precision' })
     price_factor: number
+
+    @OneToMany(type => Products, products => products.figure, {
+        eager: false
+    })
+    products: Products[]
 }
