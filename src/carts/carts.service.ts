@@ -65,4 +65,22 @@ export class CartsService {
             throw new BadRequestException()
         }
     }
+
+    async getCartById(cart_id: string): Promise<Carts> {
+        try {
+            return await this.cartsRepository.findOne(cart_id)
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
+    async deleteCart(cart_id: string): Promise<Carts> {
+        try {
+            const cart = await this.getCartById(cart_id)
+            await this.cartsRepository.delete(cart_id)
+            return cart
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
