@@ -1,6 +1,7 @@
 import { Carts } from "src/carts/carts.entity";
 import { Figure } from "src/figure/figure.entity";
 import { Gender } from "src/gender/gender.entity";
+import { Orders } from "src/orders/order.entity";
 import { Pattern } from "src/pattern/pattern.entity";
 import { PlainColor } from "src/plain-color/plain-color.entity";
 import { Size } from "src/size/size.entity";
@@ -49,6 +50,9 @@ export class Products {
 
     @ManyToMany(type => Carts, carts => carts.products)
     carts: Carts[]
+
+    @ManyToMany(type => Orders, orders => orders.products)
+    orders: Orders[]
 
     @Column({ type: 'double precision' })
     price: number
