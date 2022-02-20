@@ -63,7 +63,7 @@ export class AppController {
   }
   
   @UseGuards(JwtAuthGuard)
-  @Post('payment')
+  @Post('payment/:order_id')
   createPayment(
     @Body() createPaymentDto: CreatePaymentDto,
     @Param('order_id') order_id: string,
