@@ -19,4 +19,13 @@ export class ProductsController {
     ): Promise<Products> {
         return this.productsService.createProduct(createProductDto)
     }
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Post('create-mass')
+    createMassProducts(
+        @Body() products: any[]
+    ): Promise<Products[]> {
+        return this.productsService.createMassProducts(products)
+    }
 }

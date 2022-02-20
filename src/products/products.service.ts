@@ -57,4 +57,30 @@ export class ProductsService {
             throw new BadRequestException()
         }
     }
+
+    async createMassProducts(products: any[]): Promise<Products[]>{
+        let results: Products[] = []
+        for(let i=0; i<products.length; i++) {
+            // Find all field in database
+            let colorFound = await this.plainColorService.getPlainColorByKey(products[i].color)
+            let patternFound = await this.patternService.getPatternByKey(products[i].pattern)
+            let figureFound = await this.figureService.getFigureByKey(products[i].figure)
+            let sizeFound = await this.sizeService.getSizeByKey(products[i].size)
+            let genderFound = await this.genderService.getGenderByKey(products[i].gender)
+
+            // Price calculate
+            let newPrice = products[i].price * colorFound.price_factor * patternFound.price_factor * figureFound.price_factor * sizeFound.price_factor * genderFound.price_factor
+
+            let productCreated = this.productsRepository.create({
+                plain_color: colorFound,
+                pattern: patternFound,
+                figure: figureFound,
+                size: sizeFound,
+                gender: genderFound,
+                price:Math.ceil(newPrice)
+            })
+            results.push(productCreated)
+        }
+        return await this.productsRepository.save(results)
+    }   
 }
