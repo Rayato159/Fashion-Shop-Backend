@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Role } from 'src/users/enums/roles.enum';
 import { Roles } from 'src/users/roles.decorator';
@@ -27,5 +27,21 @@ export class ProductsController {
         @Body() products: any[]
     ): Promise<Products[]> {
         return this.productsService.createMassProducts(products)
+    }
+
+    @Get(':product_id')
+    getProductById(
+        @Param('product_id') product_id: string,
+    ): Promise<Products> {
+        return this.productsService.getProductById(product_id)
+    }
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Delete(':product_id/delete')
+    deleteProduct(
+        @Param('product_id') product_id: string
+    ): Promise<Products> {
+        return this.productsService.deleteProduct(product_id)
     }
 }

@@ -139,4 +139,22 @@ export class ProductsService {
             throw new NotFoundException()
         }
     }
+
+    async getProductById(product_id: string): Promise<Products> {
+        try {
+            return await this.productsRepository.findOne(product_id)
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
+    async deleteProduct(product_id: string): Promise<Products> {
+        try {
+            const product = await this.getProductById(product_id)
+            await this.productsRepository.delete(product_id)
+            return product
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
