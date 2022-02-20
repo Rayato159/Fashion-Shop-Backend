@@ -1,9 +1,10 @@
+import { Carts } from "src/carts/carts.entity";
 import { Figure } from "src/figure/figure.entity";
 import { Gender } from "src/gender/gender.entity";
 import { Pattern } from "src/pattern/pattern.entity";
 import { PlainColor } from "src/plain-color/plain-color.entity";
 import { Size } from "src/size/size.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'products' })
 export class Products {
@@ -45,6 +46,9 @@ export class Products {
     })
     @JoinColumn({ name: 'gender_id' })
     gender: Gender
+
+    @ManyToMany(type => Carts, carts => carts.products)
+    carts: Carts[]
 
     @Column({ type: 'double precision' })
     price: number

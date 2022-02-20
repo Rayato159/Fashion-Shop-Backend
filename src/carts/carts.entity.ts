@@ -12,7 +12,7 @@ export class Carts {
     @JoinColumn({ name: 'user_id' })
     user: Users
 
-    @ManyToMany(() => Products)
+    @ManyToMany(type => Products, { cascade: true, eager: true})
     @JoinTable({ 
         name: 'cart_session',
         joinColumn: {
@@ -20,8 +20,7 @@ export class Carts {
             referencedColumnName: "cart_id"
         },
         inverseJoinColumn: {
-            name: "product_id",
-            referencedColumnName: "product_id"
+            name: "product_id"
         },
     })
     products: Products[]
