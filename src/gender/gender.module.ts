@@ -12,6 +12,7 @@ import { RolesGuard } from 'src/users/roles.guard';
     ]),
   ],
   providers: [GenderService, RolesGuard],
-  controllers: [GenderController]
+  controllers: [GenderController],
+  exports: [GenderService]
 })
 export class GenderModule {}

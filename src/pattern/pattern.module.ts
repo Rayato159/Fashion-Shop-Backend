@@ -12,6 +12,7 @@ import { RolesGuard } from 'src/users/roles.guard';
     ]),
   ],
   providers: [PatternService, RolesGuard],
-  controllers: [PatternController]
+  controllers: [PatternController],
+  exports: [PatternService]
 })
 export class PatternModule {}
