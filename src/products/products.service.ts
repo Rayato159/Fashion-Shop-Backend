@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { paginate, Paginated, PaginateQuery } from 'nestjs-paginate';
 import { FigureService } from 'src/figure/figure.service';
 import { GenderService } from 'src/gender/gender.service';
 import { PatternService } from 'src/pattern/pattern.service';
@@ -85,7 +86,7 @@ export class ProductsService {
         return await this.productsRepository.save(results)
     }
 
-    async getProductLists(getProductsDto: GetProductsDto): Promise<Products[]> {
+    async getProductLists(getProductsDto: GetProductsDto, query: PaginateQuery): Promise<Paginated<Products>> {
         try {
             const {
                 gender,
@@ -93,9 +94,11 @@ export class ProductsService {
                 pattern,
                 figure,
                 size,
+                limits
             } = getProductsDto
 
-            const query = this.productsRepository.createQueryBuilder('products')
+            // Filter logic
+            const filter = this.productsRepository.createQueryBuilder('products')
                 .leftJoinAndSelect('products.gender', 'gender')
                 .leftJoinAndSelect('products.plain_color', 'plain_color')
                 .leftJoinAndSelect('products.pattern', 'pattern')
@@ -103,26 +106,35 @@ export class ProductsService {
                 .leftJoinAndSelect('products.size', 'size')
 
             if(gender) {
-                query.andWhere('(gender.gender = LOWER(:gender))', { gender })
+                filter.andWhere('(gender.gender = LOWER(:gender))', { gender })
             }
             if(color) {
-                query.andWhere('(plain_color.color = LOWER(:color))', { color })
+                filter.andWhere('(plain_color.color = LOWER(:color))', { color })
             }
             if(pattern) {
-                query.andWhere('(pattern.pattern = LOWER(:pattern))', { pattern })
+                filter.andWhere('(pattern.pattern = LOWER(:pattern))', { pattern })
             }
             if(figure) {
-                query.andWhere('(figure.figure = LOWER(:figure))', { figure })
+                filter.andWhere('(figure.figure = LOWER(:figure))', { figure })
             }
             if(size) {
-                query.andWhere('(size.size = UPPER(:size))', { size })
+                filter.andWhere('(size.size = UPPER(:size))', { size })
             }
 
-            const results = await query.getMany()
-            if(results.length > 0) {
-                return results
-            }
-            throw new NotFoundException()
+            // Return in pagation
+            const results = await paginate<Products>(query, filter, {
+                sortableColumns: [
+                    'product_id',
+                    'gender',
+                    'plain_color',
+                    'pattern',
+                    'figure',
+                    'figure',
+                    'size'
+                ],
+                maxLimit: limits
+            })
+            return results
         } catch(e) {
             throw new NotFoundException()
         }

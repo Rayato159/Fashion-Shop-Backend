@@ -1,4 +1,5 @@
 import { Controller, Post, UseGuards, Request, Body, Get, Query } from '@nestjs/common';
+import { Paginate, Paginated, PaginateQuery } from 'nestjs-paginate';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { LocalAuthGuard } from './auth/local/local-auth.guard';
@@ -33,8 +34,9 @@ export class AppController {
 
   @Get('product-lists')
   getProductLists(
-    @Query() getProductsDto: GetProductsDto
-  ): Promise<Products[]> {
-    return this.productsService.getProductLists(getProductsDto)
+    @Query() getProductsDto: GetProductsDto,
+    @Paginate() query: PaginateQuery
+  ): Promise<Paginated<Products>> {
+    return this.productsService.getProductLists(getProductsDto, query)
   }
 }
