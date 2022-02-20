@@ -22,6 +22,7 @@ import { RolesGuard } from 'src/users/roles.guard';
     ]),
   ],
   providers: [ProductsService, RolesGuard],
-  controllers: [ProductsController]
+  controllers: [ProductsController],
+  exports: [ProductsService]
 })
 export class ProductsModule {}

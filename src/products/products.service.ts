@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FigureService } from 'src/figure/figure.service';
 import { GenderService } from 'src/gender/gender.service';
@@ -6,6 +6,7 @@ import { PatternService } from 'src/pattern/pattern.service';
 import { PlainColorService } from 'src/plain-color/plain-color.service';
 import { SizeService } from 'src/size/size.service';
 import { CreateProductDto } from './dto/create-product.dto';
+import { GetProductsDto } from './dto/get-products.dto';
 import { Products } from './products.entity';
 import { ProductsRepository } from './products.repository';
 
@@ -82,5 +83,48 @@ export class ProductsService {
             results.push(productCreated)
         }
         return await this.productsRepository.save(results)
-    }   
+    }
+
+    async getProductLists(getProductsDto: GetProductsDto): Promise<Products[]> {
+        try {
+            const {
+                gender,
+                color,
+                pattern,
+                figure,
+                size,
+            } = getProductsDto
+
+            const query = this.productsRepository.createQueryBuilder('products')
+                .leftJoinAndSelect('products.gender', 'gender')
+                .leftJoinAndSelect('products.plain_color', 'plain_color')
+                .leftJoinAndSelect('products.pattern', 'pattern')
+                .leftJoinAndSelect('products.figure', 'figure')
+                .leftJoinAndSelect('products.size', 'size')
+
+            if(gender) {
+                query.andWhere('(gender.gender = LOWER(:gender))', { gender })
+            }
+            if(color) {
+                query.andWhere('(plain_color.color = LOWER(:color))', { color })
+            }
+            if(pattern) {
+                query.andWhere('(pattern.pattern = LOWER(:pattern))', { pattern })
+            }
+            if(figure) {
+                query.andWhere('(figure.figure = LOWER(:figure))', { figure })
+            }
+            if(size) {
+                query.andWhere('(size.size = UPPER(:size))', { size })
+            }
+
+            const results = await query.getMany()
+            if(results.length > 0) {
+                return results
+            }
+            throw new NotFoundException()
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
 }
