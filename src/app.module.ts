@@ -12,6 +12,7 @@ import { GenderModule } from './gender/gender.module';
 import { SizeModule } from './size/size.module';
 import { ProductsModule } from './products/products.module';
 import { CartsModule } from './carts/carts.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { CartsModule } from './carts/carts.module';
     SizeModule,
     ProductsModule,
     CartsModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

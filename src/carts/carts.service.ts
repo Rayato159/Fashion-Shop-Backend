@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Products } from 'src/products/products.entity';
 import { ProductsService } from 'src/products/products.service';
 import { UsersService } from 'src/users/users.service';
 import { Carts } from './carts.entity';
@@ -69,6 +70,19 @@ export class CartsService {
     async getCartById(cart_id: string): Promise<Carts> {
         try {
             return await this.cartsRepository.findOne(cart_id)
+        } catch(e) {
+            throw new NotFoundException()
+        }
+    }
+
+    async getItemInCart(cart_id: string): Promise<Products[]> {
+        try {
+            const cart = await this.getCartById(cart_id)
+            let products: Products[] = []
+            for(let i=0; i<cart.products.length; i++) {
+                products.push(cart.products[i])
+            }
+            return products
         } catch(e) {
             throw new NotFoundException()
         }

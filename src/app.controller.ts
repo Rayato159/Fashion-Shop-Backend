@@ -2,7 +2,11 @@ import { Controller, Post, UseGuards, Request, Body, Get, Query } from '@nestjs/
 import { Paginate, Paginated, PaginateQuery } from 'nestjs-paginate';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
+import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local/local-auth.guard';
+import { CreateOrderDto } from './orders/dto/create-order.dto';
+import { Orders } from './orders/order.entity';
+import { OrdersService } from './orders/orders.service';
 import { GetProductsDto } from './products/dto/get-products.dto';
 import { Products } from './products/products.entity';
 import { ProductsService } from './products/products.service';
@@ -17,6 +21,7 @@ export class AppController {
     private usersService: UsersService,
     private authService: AuthService,
     private productsService: ProductsService,
+    private ordersService: OrdersService,
   ) {}
 
   @Post('register')
@@ -38,5 +43,19 @@ export class AppController {
     @Paginate() query: PaginateQuery
   ): Promise<Paginated<Products>> {
     return this.productsService.getProductLists(getProductsDto, query)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('create-order')
+  createOrder(
+    @Body() createOrderDto: CreateOrderDto,
+    @Request() { user_id }: any,
+  ): Promise<Orders> {
+    return this.ordersService.createOrder(createOrderDto, user_id)
+  }
+
+  @Get('orders/get')
+  getOrders(): Promise<Orders[]> {
+    return this.ordersService.getOrders()
   }
 }
