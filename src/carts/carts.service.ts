@@ -75,19 +75,6 @@ export class CartsService {
         }
     }
 
-    async getItemInCart(cart_id: string): Promise<Products[]> {
-        try {
-            const cart = await this.getCartById(cart_id)
-            let products: Products[] = []
-            for(let i=0; i<cart.products.length; i++) {
-                products.push(cart.products[i])
-            }
-            return products
-        } catch(e) {
-            throw new NotFoundException()
-        }
-    }
-
     async deleteCart(cart_id: string): Promise<Carts> {
         try {
             const cart = await this.getCartById(cart_id)
