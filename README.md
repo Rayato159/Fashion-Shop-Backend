@@ -8,6 +8,13 @@
     <p>เพื่อเข้ารับการทดสอบสมัครงาน ทีม Software ตำแหน่ง Backend Dev ของบริษัท iCreativeSystems</p>
 </ul>
 
+<h2>Tools</h2>
+<ul>
+  <li><strong>NestJs Framework</strong></li>
+  <li><strong>PostgresSQL</strong></li>
+  <li><strong>Docker</strong></li>
+</ul>
+
 <h2>Objective ที่สามารถทำได้</h2>
   <ul>
   <li>Product-lists</li>
