@@ -1,8 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { paginate, Paginated, PaginateQuery } from 'nestjs-paginate';
 import { CartsService } from 'src/carts/carts.service';
 import { UsersService } from 'src/users/users.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { GetOrdersDto } from './dto/get-orders.dto';
 import { OrderStatus } from './enums/order-status.enum';
 import { Orders } from './order.entity';
 import { OrdersRepsoitory } from './orders.repository';
@@ -36,9 +38,35 @@ export class OrdersService {
         }
     }
 
-    async getOrders(): Promise<Orders[]> {
+    async getOrders(getOrdersDto: GetOrdersDto, query: PaginateQuery): Promise<Paginated<Orders>> {
         try {
-            return await this.ordersRepository.find()
+            const {
+                start,
+                end,
+                status,
+                limits,
+            } = getOrdersDto
+            const filter = this.ordersRepository.createQueryBuilder('orders')
+                .orderBy('orders.created', 'DESC')
+
+            if(status) {
+                filter.andWhere('(orders.status = LOWER(:status))', { status })
+            }
+            if(start && end) {
+                filter.andWhere('(orders.created >= :start AND orders.created <= :end)', { start, end })
+            }
+
+            // Return in pagation
+            const results = await paginate<Orders>(query, filter, {
+                sortableColumns: [
+                    'order_id',
+                    'status',
+                    'created',
+                ],
+                maxLimit: limits
+            })
+            return results
+            throw new NotFoundException()
         } catch(e) {
             throw new NotFoundException()
         }

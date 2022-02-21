@@ -12,7 +12,7 @@ export class OrdersController {
 
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.Admin)
-    @Patch('update-status')
+    @Patch('update-status/:order_id')
     updateOrderStatus(
         @Param('order_id') order_id: string
     ): Promise<Orders> {

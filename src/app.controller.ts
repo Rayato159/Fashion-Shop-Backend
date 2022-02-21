@@ -4,6 +4,7 @@ import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local/local-auth.guard';
 import { CreateOrderDto } from './orders/dto/create-order.dto';
+import { GetOrdersDto } from './orders/dto/get-orders.dto';
 import { Orders } from './orders/order.entity';
 import { OrdersService } from './orders/orders.service';
 import { CreatePaymentDto } from './payments/dto/create-payment.dto';
@@ -13,6 +14,9 @@ import { GetProductsDto } from './products/dto/get-products.dto';
 import { Products } from './products/products.entity';
 import { ProductsService } from './products/products.service';
 import { RegisterDto } from './users/dto/register.dto';
+import { Role } from './users/enums/roles.enum';
+import { Roles } from './users/roles.decorator';
+import { RolesGuard } from './users/roles.guard';
 import { Users } from './users/users.entity';
 import { UsersService } from './users/users.service';
 
@@ -56,10 +60,14 @@ export class AppController {
     return this.ordersService.createOrder(createOrderDto, user_id)
   }
 
-  // Just for dev
-  @Get('orders/get')
-  getOrders(): Promise<Orders[]> {
-    return this.ordersService.getOrders()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Get('orders-lists')
+  getOrders(
+    @Query() getOrdersDto: GetOrdersDto,
+    @Paginate() query: PaginateQuery,
+  ): Promise<Paginated<Orders>> {
+    return this.ordersService.getOrders(getOrdersDto, query)
   }
   
   @UseGuards(JwtAuthGuard)
