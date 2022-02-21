@@ -99,7 +99,7 @@
 ```
 ***หากต้องการข้อมูล อยู่ที่ Mock up folder ครับ
 
-1. ทำการ Register (สมาถใส่ role ได้ในขั้นตอนนี้)
+1. ทำการ Register (สมารถใส่ role ได้ในขั้นตอนนี้)
 2. ทำการ Login เพื่อรับ access token
 3. ทำการ create ในส่วนของ gender, size, plain-color, pattern และ figure ให้เรียบร้อยก่อนที่จะ create products
 4. ทำการ create poducts
