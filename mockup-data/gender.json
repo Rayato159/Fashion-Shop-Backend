@@ -1,0 +1,10 @@
+[
+    {
+        "gender": "female",
+        "price_factor": 1.2
+    },
+    {
+        "gender": "male",
+        "price_factor": 1
+    }
+]

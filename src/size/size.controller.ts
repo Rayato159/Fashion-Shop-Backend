@@ -21,6 +21,15 @@ export class SizeController {
         return this.sizeService.createSize(createSizeDto)
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Post('create-mass')
+    createMassSize(
+        @Body() sizes: any[]
+    ): Promise<Size[]> {
+        return this.sizeService.createMassSize(sizes)
+    }
+
     @Get()
     getSize(
         @Query() getSizeDto: GetSizeDto,

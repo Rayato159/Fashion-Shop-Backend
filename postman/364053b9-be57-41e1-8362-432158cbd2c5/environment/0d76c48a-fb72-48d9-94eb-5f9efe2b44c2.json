@@ -1,0 +1,1 @@
+{"id":"0d76c48a-fb72-48d9-94eb-5f9efe2b44c2","name":"Taxmap","values":[{"key":"base_url","value":"http://localhost:3000/api","enabled":true,"type":"default"},{"key":"parcel_id","value":"25cee611-0454-4632-935e-52d5b96b47d1","enabled":true,"type":"default"},{"key":"accessToken","value":"","enabled":true,"type":"default"}]}

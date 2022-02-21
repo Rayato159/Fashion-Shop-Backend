@@ -1,0 +1,122 @@
+[
+    {
+        "color": "red",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "M",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "green",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "M",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "blue",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "magenta",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "XL",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "black",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "red",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "green",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "blue",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "magenta",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "black",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "red",
+        "pattern": "suit",
+        "figure": "vintage",
+        "size": "S",
+        "gender": "female",
+        "price": 300
+    },
+    {
+        "color": "green",
+        "pattern": "suit",
+        "figure": "vintage",
+        "size": "XS",
+        "gender": "male",
+        "price": 300
+    },
+    {
+        "color": "blue",
+        "pattern": "t-shirt",
+        "figure": "comics",
+        "size": "L",
+        "gender": "female",
+        "price": 300
+    },
+    {
+        "color": "magenta",
+        "pattern": "t-shirt",
+        "figure": "manga",
+        "size": "L",
+        "gender": "female",
+        "price": 300
+    },
+    {
+        "color": "black",
+        "pattern": "t-shirt",
+        "figure": "manga",
+        "size": "L",
+        "gender": "female",
+        "price": 300
+    }
+]

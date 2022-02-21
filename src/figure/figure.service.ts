@@ -75,4 +75,16 @@ export class FigureService {
             throw new NotFoundException()
         }
     }
+
+    async createMassFigure(figures: any[]): Promise<Figure[]>{
+        let results: Figure[] = []
+        for(let i=0; i<figures.length; i++) {
+            let figureCreated = this.figureRepository.create({
+                figure: figures[i].figure,
+                price_factor: figures[i].price_factor
+            })
+            results.push(figureCreated)
+        }
+        return await this.figureRepository.save(results)
+    }
 }
