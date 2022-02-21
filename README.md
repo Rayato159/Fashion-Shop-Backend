@@ -74,6 +74,7 @@
   <p>Start project with docker 🐳</p>
 
   ```
+  cd ./Fashion-Shop-Backend
   docker-compose up
   ```
 
