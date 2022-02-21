@@ -1,0 +1,24 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  api:
+    # image: rayato159/fashion-shop
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:1234@postgres:5432/fashiondb
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "8080:3000"
+
+  postgres:
+    image: postgres:14.2-alpine
+    ports:
+      - "35000:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: fashiondb

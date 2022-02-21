@@ -20,24 +20,36 @@ import { RolesGuard } from './users/roles.guard';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: [`.env.stage.${process.env.STAGE}`]
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
-        return {
-          autoLoadEntities: true,
-          synchronize: true,
-          type: 'postgres',
-          host: configService.get('DB_HOST'),
-          port: configService.get('DB_PORT'),
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE'),
-        }
-      }
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      autoLoadEntities: true,
+      synchronize: true,
+      url: process.env.DATABASE_URL,
     }),
+
+    // For dev without Docker
+
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //   useFactory: async (configService: ConfigService) => {
+    //     return {
+    //       type: 'postgres',
+    //       autoLoadEntities: true,
+    //       synchronize: true,
+    //       // url: process.env.DATABASE_URL,
+    //       host: configService.get('DB_HOST'),
+    //       port: configService.get('DB_PORT'),
+    //       username: configService.get('DB_USERNAME'),
+    //       password: configService.get('DB_PASSWORD'),
+    //       database: configService.get('DB_DATABASE'),
+    //     }
+    //   }
+    // }),
+    
     UsersModule,
     AuthModule,
     PlainColorModule,
