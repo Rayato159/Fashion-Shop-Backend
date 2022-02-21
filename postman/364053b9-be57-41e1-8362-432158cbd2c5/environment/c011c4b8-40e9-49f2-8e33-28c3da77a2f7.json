@@ -1,0 +1,1 @@
+{"id":"c011c4b8-40e9-49f2-8e33-28c3da77a2f7","name":"fashion-env","values":[{"key":"baseUrl","value":"http://localhost:8080/api","enabled":true,"type":"default"},{"key":"accessToken","value":"","enabled":true,"type":"any"}]}
