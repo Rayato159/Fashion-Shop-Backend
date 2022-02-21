@@ -17,7 +17,7 @@
 <ul>
   <li><strong>NestJs Framework</strong></li>
   <li><strong>PostgresSQL</strong></li>
-  <li><strong>Docker</strong></li>
+  <li><strong>Docker 🐳</strong></li>
 </ul>
 
 <h2>Objective ที่สามารถทำได้</h2>
@@ -71,7 +71,7 @@
   git clone https://github.com/Rayato159/Fashion-Shop-Backend.git
   ```
 
-  <p>Start project with docker</p>
+  <p>Start project with docker 🐳</p>
 
   ```
   docker-compose up
