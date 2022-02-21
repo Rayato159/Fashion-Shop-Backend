@@ -75,4 +75,16 @@ export class PlainColorService {
             throw new NotFoundException()
         }
     }
+
+    async createMassPlainColor(colors: any[]): Promise<PlainColor[]>{
+        let results: PlainColor[] = []
+        for(let i=0; i<colors.length; i++) {
+            let plainColorCreated = this.plainColorReposiotry.create({
+                color: colors[i].color,
+                price_factor: colors[i].price_factor
+            })
+            results.push(plainColorCreated)
+        }
+        return await this.plainColorReposiotry.save(results)
+    }
 }

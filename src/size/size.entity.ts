@@ -14,7 +14,8 @@ export class Size {
     price_factor: number
 
     @OneToMany(type => Products, products => products.size, {
-        eager: false
+        eager: false,
+        nullable: true,
     })
     products: Products[]
 }

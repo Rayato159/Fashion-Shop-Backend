@@ -14,7 +14,8 @@ export class Pattern {
     price_factor: number
 
     @OneToMany(type => Products, products => products.pattern, {
-        eager: false
+        eager: false,
+        nullable: true,
     })
     products: Products[]
 }

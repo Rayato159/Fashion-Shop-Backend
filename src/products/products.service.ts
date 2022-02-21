@@ -79,7 +79,7 @@ export class ProductsService {
                 figure: figureFound,
                 size: sizeFound,
                 gender: genderFound,
-                price:Math.ceil(newPrice)
+                price: Math.ceil(newPrice)
             })
             results.push(productCreated)
         }

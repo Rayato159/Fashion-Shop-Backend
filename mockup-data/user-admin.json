@@ -1,0 +1,6 @@
+{
+    "username": "admin",
+    "password": "Password!1234",
+    "passwordConfirm": "Password!1234",
+    "role": "admin"
+}

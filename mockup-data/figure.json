@@ -1,0 +1,22 @@
+[
+    {
+        "figure": "manga",
+        "price_factor": 1.2 
+    },
+    {
+        "figure": "comics",
+        "price_factor": 1.2 
+    },
+    {
+        "figure": "vintage",
+        "price_factor": 1.1
+    },
+    {
+        "figure": "work",
+        "price_factor": 1.3 
+    },
+    {
+        "figure": "limited",
+        "price_factor": 1.5
+    }
+]

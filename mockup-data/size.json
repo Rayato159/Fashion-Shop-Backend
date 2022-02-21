@@ -1,0 +1,22 @@
+[
+    {
+        "size": "S",
+        "price_factor": 1
+    },
+    {
+        "size": "XS",
+        "price_factor": 1
+    },
+    {
+        "size": "M",
+        "price_factor": 1
+    },
+    {
+        "size": "L",
+        "price_factor": 1.1
+    },
+    {
+        "size": "XL",
+        "price_factor": 1.1
+    }
+]

@@ -20,6 +20,15 @@ export class GenderController {
         return this.genderService.createGender(createGenderDto)
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Post('create-mass')
+    createMassGender(
+        @Body() genders: any[]
+    ): Promise<Gender[]> {
+        return this.genderService.createMassGender(genders)
+    }
+
     @Get()
     getGender(): Promise<Gender[]> {
         return this.genderService.getGender()
