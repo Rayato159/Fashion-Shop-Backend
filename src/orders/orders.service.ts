@@ -1,8 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { query } from 'express';
 import { CartsService } from 'src/carts/carts.service';
 import { UsersService } from 'src/users/users.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { GetOrdersDto } from './dto/get-orders.dto';
 import { OrderStatus } from './enums/order-status.enum';
 import { Orders } from './order.entity';
 import { OrdersRepsoitory } from './orders.repository';
@@ -36,9 +38,28 @@ export class OrdersService {
         }
     }
 
-    async getOrders(): Promise<Orders[]> {
+    async getOrders(getOrdersDto: GetOrdersDto): Promise<Orders[]> {
         try {
-            return await this.ordersRepository.find()
+            const {
+                start,
+                end,
+                status,
+            } = getOrdersDto
+            const filter = this.ordersRepository.createQueryBuilder('orders')
+                .orderBy('orders.created', 'DESC')
+
+            if(status) {
+                filter.andWhere('(orders.status = LOWER(:status))', { status })
+            }
+            if(start && end) {
+                filter.andWhere('(orders.created >= :start AND orders.created <= :end)', { start, end })
+            }
+
+            const results = await filter.getMany()
+            if(results.length > 0) {
+                return results
+            }
+            throw new NotFoundException()
         } catch(e) {
             throw new NotFoundException()
         }

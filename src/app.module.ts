@@ -15,6 +15,7 @@ import { CartsModule } from './carts/carts.module';
 import { OrdersModule } from './orders/orders.module';
 import { PaymentsModule } from './payments/payments.module';
 import { PaymentImagesModule } from './payment-images/payment-images.module';
+import { RolesGuard } from './users/roles.guard';
 
 @Module({
   imports: [
@@ -51,6 +52,6 @@ import { PaymentImagesModule } from './payment-images/payment-images.module';
     PaymentImagesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RolesGuard],
 })
 export class AppModule {}
