@@ -590,7 +590,7 @@
     product_id: string
   ```
 
-  <li>Remove item from cart/li>
+  <li>Remove item from cart</li>
 
   ```
   http://localhost:8080/carts/remove
@@ -602,79 +602,7 @@
     product_id: string
   ```
 
-  <h2 id="products">Products</h2>
-
-  <ul>
-    <li>Create products</li>
-
-  ```
-  http://localhost:8080/products/create
-  ```
-  ```
-  Role: admin
-  Method: POST
-  Body:
-    color: string
-    pattern: string
-    figure: string
-    size: string
-    gender: string
-    price: number (This is a base price)
-  ```
-
-  <li>Create figure in array</li>
-
-  ```
-  http://localhost:8080/products/create-mass
-  ```
-  ```
-  Role: admin
-  Method: POST
-  Body:
-    CreateProductDto[]
-  ```
-
-  <li>Get Products-lists</li>
-
-  ```
-  http://localhost:8080/product-lists
-  ```
-  ```
-  Role: user
-  Method: GET
-  Query:
-    gender: string
-    color: string
-    pattern: string
-    figure: string
-    size: string
-    page: number
-    limits: number
-  ```
-
-  <li>Get product by id</li>
-
-  ```
-  http://localhost:8080/products/:product_id
-  ```
-  ```
-  Role: user
-  Method: GET
-  Param:
-    product_id: string
-  ```
-
-  <li>Delete product</li>
-
-  ```
-  http://localhost:8080/products/:product_id/delete
-  ```
-  ```
-  Role: admin
-  Method: DELETE
-  Param:
-    product_id: string
-  ```
+  
 
   </ul>
 
@@ -719,80 +647,6 @@
   Method: PATCH
   Param:
     order_id: string
-  ```
-
-  <h2 id="products">Products</h2>
-
-  <ul>
-    <li>Create products</li>
-
-  ```
-  http://localhost:8080/products/create
-  ```
-  ```
-  Role: admin
-  Method: POST
-  Body:
-    color: string
-    pattern: string
-    figure: string
-    size: string
-    gender: string
-    price: number (This is a base price)
-  ```
-
-  <li>Create figure in array</li>
-
-  ```
-  http://localhost:8080/products/create-mass
-  ```
-  ```
-  Role: admin
-  Method: POST
-  Body:
-    CreateProductDto[]
-  ```
-
-  <li>Get Products-lists</li>
-
-  ```
-  http://localhost:8080/product-lists
-  ```
-  ```
-  Role: user
-  Method: GET
-  Query:
-    gender: string
-    color: string
-    pattern: string
-    figure: string
-    size: string
-    page: number
-    limits: number
-  ```
-
-  <li>Get product by id</li>
-
-  ```
-  http://localhost:8080/products/:product_id
-  ```
-  ```
-  Role: user
-  Method: GET
-  Param:
-    product_id: string
-  ```
-
-  <li>Delete product</li>
-
-  ```
-  http://localhost:8080/products/:product_id/delete
-  ```
-  ```
-  Role: admin
-  Method: DELETE
-  Param:
-    product_id: string
   ```
 
   </ul>
