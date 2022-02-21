@@ -1,0 +1,22 @@
+[
+    {
+        "color": "red",
+        "price_factor": 1.2
+    },
+    {
+        "color": "green",
+        "price_factor": 1.1
+    },
+    {
+        "color": "blue",
+        "price_factor": 1.4
+    },
+    {
+        "color": "black",
+        "price_factor": 1.1
+    },
+    {
+        "color": "magenta",
+        "price_factor": 1.3
+    }
+]

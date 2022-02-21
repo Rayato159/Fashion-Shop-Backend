@@ -1,0 +1,14 @@
+[
+    {
+        "pattern": "shirt",
+        "price_factor": 1.2
+    },
+    {
+        "pattern": "t-shirt",
+        "price_factor": 1
+    },
+    {
+        "pattern": "suit",
+        "price_factor": 1.3
+    }
+]

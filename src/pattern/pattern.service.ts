@@ -75,4 +75,16 @@ export class PatternService {
             throw new NotFoundException()
         }
     }
+
+    async createMassPattern(patterns: any[]): Promise<Pattern[]>{
+        let results: Pattern[] = []
+        for(let i=0; i<patterns.length; i++) {
+            let patternCreated = this.patternRepository.create({
+                pattern: patterns[i].color,
+                price_factor: patterns[i].price_factor
+            })
+            results.push(patternCreated)
+        }
+        return await this.patternRepository.save(results)
+    }
 }

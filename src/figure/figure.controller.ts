@@ -21,6 +21,16 @@ export class FigureController {
         return this.figureService.createFigure(createFigureDto)
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Post('create-mass')
+    createMassFigure(
+        @Body() figures: any[]
+    ): Promise<Figure[]> {
+        return this.figureService.createMassFigure(figures)
+    }
+
+
     @Get()
     getFigure(
         @Query() getFigureDto: GetFigureDto

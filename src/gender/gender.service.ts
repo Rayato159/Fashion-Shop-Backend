@@ -61,4 +61,16 @@ export class GenderService {
             throw new NotFoundException()
         }
     }
+
+    async createMassGender(genders: any[]): Promise<Gender[]>{
+        let results: Gender[] = []
+        for(let i=0; i<genders.length; i++) {
+            let genderCreated = this.genderRepository.create({
+                gender: genders[i].color,
+                price_factor: genders[i].price_factor
+            })
+            results.push(genderCreated)
+        }
+        return await this.genderRepository.save(results)
+    }
 }

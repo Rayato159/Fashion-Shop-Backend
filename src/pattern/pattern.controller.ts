@@ -21,6 +21,15 @@ export class PatternController {
         return this.patternService.createPattern(createPatternDto)
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Post('create-mass')
+    createMassPattern(
+        @Body() patterns: any[]
+    ): Promise<Pattern[]> {
+        return this.patternService.createMassPattern(patterns)
+    }
+
     @Get()
     getPattern(
         @Query() getPatternDto: GetPatternDto,

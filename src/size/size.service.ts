@@ -69,4 +69,16 @@ export class SizeService {
             throw new NotFoundException()
         }
     }
+
+    async createMassSize(sizes: any[]): Promise<Size[]>{
+        let results: Size[] = []
+        for(let i=0; i<sizes.length; i++) {
+            let sizeCreated = this.sizeReposiotry.create({
+                size: sizes[i].color,
+                price_factor: sizes[i].price_factor
+            })
+            results.push(sizeCreated)
+        }
+        return await this.sizeReposiotry.save(results)
+    }
 }

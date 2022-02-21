@@ -23,6 +23,15 @@ export class PlainColorController {
         return this.plainColorService.createPlainColor(createPlainColorDto)
     }
 
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
+    @Post('create-mass')
+    createMassPlainColor(
+        @Body() colors: any[]
+    ): Promise<PlainColor[]> {
+        return this.plainColorService.createMassPlainColor(colors)
+    }
+
     @Get()
     getPlainColor(
         @Query() getPlainColorDto: GetPlainColorDto
