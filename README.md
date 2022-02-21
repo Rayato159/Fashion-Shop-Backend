@@ -106,9 +106,9 @@
 
 1. ทำการ Register (สมารถใส่ role ได้ในขั้นตอนนี้)
 2. ทำการ Login เพื่อรับ access token
-3. ทำการ create ในส่วนของ gender, size, plain-color, pattern และ figure ให้เรียบร้อยก่อนที่จะ create products
-4. ทำการ create poducts
-5. ทำการ create cart
+3. ทำการ create ในส่วนของ gender, size, plain-color, pattern และ figure ให้เรียบร้อยก่อนที่จะ create products (ใช้ Data ใน Mockup แล้วยิง API ที่เป็นการ create แบบ array ขึ้นไป)
+4. ทำการ create poducts (ใช้ Data ใน Mockup แล้วยิง API ที่เป็นการ create แบบ array ขึ้นไป)
+5. ทำการ create cart (ทำการกดสร้างได้ทันที หาก login แล้ว)
 6. ทำการ เพิ่ม หรือ ลด product ลงใน cart
 7. ทำการ create payemnt
 8. ทำการ upload หรือใส่ url ใน payment-images service
