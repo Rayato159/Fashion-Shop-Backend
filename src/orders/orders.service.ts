@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { query } from 'express';
+import { paginate, Paginated, PaginateQuery } from 'nestjs-paginate';
 import { CartsService } from 'src/carts/carts.service';
 import { UsersService } from 'src/users/users.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -38,12 +38,13 @@ export class OrdersService {
         }
     }
 
-    async getOrders(getOrdersDto: GetOrdersDto): Promise<Orders[]> {
+    async getOrders(getOrdersDto: GetOrdersDto, query: PaginateQuery): Promise<Paginated<Orders>> {
         try {
             const {
                 start,
                 end,
                 status,
+                limits,
             } = getOrdersDto
             const filter = this.ordersRepository.createQueryBuilder('orders')
                 .orderBy('orders.created', 'DESC')
@@ -55,10 +56,16 @@ export class OrdersService {
                 filter.andWhere('(orders.created >= :start AND orders.created <= :end)', { start, end })
             }
 
-            const results = await filter.getMany()
-            if(results.length > 0) {
-                return results
-            }
+            // Return in pagation
+            const results = await paginate<Orders>(query, filter, {
+                sortableColumns: [
+                    'order_id',
+                    'status',
+                    'created',
+                ],
+                maxLimit: limits
+            })
+            return results
             throw new NotFoundException()
         } catch(e) {
             throw new NotFoundException()

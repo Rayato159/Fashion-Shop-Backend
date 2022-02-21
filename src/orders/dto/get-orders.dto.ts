@@ -12,4 +12,7 @@ export class GetOrdersDto {
 
     @IsOptional()
     end?: Date
+
+    @IsOptional()
+    limits?: number
 }

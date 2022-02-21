@@ -64,9 +64,10 @@ export class AppController {
   @Roles(Role.Admin)
   @Get('orders-lists')
   getOrders(
-    @Query() getOrdersDto: GetOrdersDto
-  ): Promise<Orders[]> {
-    return this.ordersService.getOrders(getOrdersDto)
+    @Query() getOrdersDto: GetOrdersDto,
+    @Paginate() query: PaginateQuery,
+  ): Promise<Paginated<Orders>> {
+    return this.ordersService.getOrders(getOrdersDto, query)
   }
   
   @UseGuards(JwtAuthGuard)
