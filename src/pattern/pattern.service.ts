@@ -80,7 +80,7 @@ export class PatternService {
         let results: Pattern[] = []
         for(let i=0; i<patterns.length; i++) {
             let patternCreated = this.patternRepository.create({
-                pattern: patterns[i].color,
+                pattern: patterns[i].pattern,
                 price_factor: patterns[i].price_factor
             })
             results.push(patternCreated)

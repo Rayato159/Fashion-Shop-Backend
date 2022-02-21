@@ -66,7 +66,7 @@ export class GenderService {
         let results: Gender[] = []
         for(let i=0; i<genders.length; i++) {
             let genderCreated = this.genderRepository.create({
-                gender: genders[i].color,
+                gender: genders[i].gender,
                 price_factor: genders[i].price_factor
             })
             results.push(genderCreated)

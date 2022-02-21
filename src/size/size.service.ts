@@ -74,7 +74,7 @@ export class SizeService {
         let results: Size[] = []
         for(let i=0; i<sizes.length; i++) {
             let sizeCreated = this.sizeReposiotry.create({
-                size: sizes[i].color,
+                size: sizes[i].size,
                 price_factor: sizes[i].price_factor
             })
             results.push(sizeCreated)

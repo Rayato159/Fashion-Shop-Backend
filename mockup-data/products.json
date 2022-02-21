@@ -89,8 +89,8 @@
     },
     {
         "color": "green",
-        "pattern": "shirt",
-        "figure": "suit",
+        "pattern": "suit",
+        "figure": "vintage",
         "size": "XS",
         "gender": "male",
         "price": 300

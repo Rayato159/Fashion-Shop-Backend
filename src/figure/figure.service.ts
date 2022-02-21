@@ -80,7 +80,7 @@ export class FigureService {
         let results: Figure[] = []
         for(let i=0; i<figures.length; i++) {
             let figureCreated = this.figureRepository.create({
-                figure: figures[i].color,
+                figure: figures[i].figure,
                 price_factor: figures[i].price_factor
             })
             results.push(figureCreated)

@@ -14,7 +14,8 @@ export class PlainColor {
     price_factor: number
 
     @OneToMany(type => Products, products => products.plain_color, {
-        eager: false
+        eager: false,
+        nullable: true,
     })
     products: Products[]
 }
