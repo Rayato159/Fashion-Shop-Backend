@@ -132,10 +132,10 @@
 
 <h2 id="users">Users</h2>
   <ul>
-    <li>Create gender</li>
+    <li>Register</li>
 
   ```
-  http://localhost:8080/gender/
+  http://localhost:8080/register
   ```
   ```
   Method: POST
@@ -149,7 +149,7 @@
   <li>Login</li>
 
   ```
-  http://localhost:8080/register
+  http://localhost:8080/login
   ```
   ```
   Method: POST
