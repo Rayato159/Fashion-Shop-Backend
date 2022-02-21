@@ -1,4 +1,4 @@
-<h1>Fashion Shop E-commerce Backend Assignment<h1>
+<h1>Fashion Shop E-commerce Backend Assignment</h1>
 
 <h2>Introduce</h2>
 <ul>
@@ -6,6 +6,11 @@
     <p>เรืองยศ หนานเจียง</p>
   <li><strong>วัตถุประสงค์</strong></li>
     <p>เพื่อเข้ารับการทดสอบสมัครงาน ทีม Software ตำแหน่ง Backend Dev ของบริษัท iCreativeSystems</p>
+</ul>
+
+<h2>Entity Diagram</h2>
+<ul>
+    <li><a href="https://drive.google.com/file/d/1Y8s6K7vpvOqWSF-3KSF295Prbhw4CDgx/view?usp=sharing">Click Here!</a></li>
 </ul>
 
 <h2>Tools</h2>
